@@ -4,7 +4,16 @@ var fsharpTestById = fsharpTest.ToDictionary(x => x.Id);
 
 _ =
     from item in input
-    let text = fsharpTestById[item].Text
+    let text = fsharpTestById[item].Text // <- generates CS1503
+    select text;
+
+// workaround
+var fsharpTestWorkAround = Array.Empty<fsharp.Test>();
+Dictionary<Guid, fsharp.Test>? fsharpTestByIdWorkAround = fsharpTestWorkAround.ToDictionary(x => x.Id); // <- prevents CS1503
+
+_ =
+    from item in input
+    let text = fsharpTestByIdWorkAround[item].Text
     select text;
 
 var csharpTest = Array.Empty<csharplib.Test>();
