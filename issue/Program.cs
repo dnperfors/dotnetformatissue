@@ -15,12 +15,12 @@ _ =
     let text = csharpTestById[item].Text
     select text;
 
-var internTest = Array.Empty<Test>();
-var internTestById = internTest.ToDictionary(x => x.Id);
+var test = Array.Empty<Test>();
+var testById = test.ToDictionary(x => x.Id);
 
 _ =
     from item in input
-    let text = internTestById[item].Text
+    let text = testById[item].Text
     select text;
 
 public class Test
