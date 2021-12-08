@@ -1,36 +1,25 @@
-﻿var input = Array.Empty<Guid>();
-var fsharpTest = Array.Empty<fsharp.Test>();
+﻿var fsharpTest = Array.Empty<fsharp.Test>();
 var fsharpTestById = fsharpTest.ToDictionary(x => x.Id);
 
-_ =
-    from item in input
-    let text = fsharpTestById[item].Text // <- generates CS1503
-    select text;
+_ = fsharpTestById[Guid.Empty].Text;// <- generates CS1503
 
 // workaround
 var fsharpTestWorkAround = Array.Empty<fsharp.Test>();
 Dictionary<Guid, fsharp.Test>? fsharpTestByIdWorkAround = fsharpTestWorkAround.ToDictionary(x => x.Id); // <- prevents CS1503
 
-_ =
-    from item in input
-    let text = fsharpTestByIdWorkAround[item].Text
-    select text;
+_ = fsharpTestByIdWorkAround[Guid.Empty].Text;
+
+// no issues
 
 var csharpTest = Array.Empty<csharplib.Test>();
 var csharpTestById = csharpTest.ToDictionary(x => x.Id);
 
-_ =
-    from item in input
-    let text = csharpTestById[item].Text
-    select text;
+_ = csharpTestById[Guid.Empty].Text;
 
 var test = Array.Empty<Test>();
 var testById = test.ToDictionary(x => x.Id);
 
-_ =
-    from item in input
-    let text = testById[item].Text
-    select text;
+_ = testById[Guid.Empty].Text;
 
 public class Test
 {
